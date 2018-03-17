@@ -1,0 +1,18 @@
+name: dast
+version: 0.1.0
+
+authors:
+  - at-grandpa <yoshiyuki.tsuchida.k@gmail.com>
+
+targets:
+  dast:
+    main: src/dast.cr
+
+crystal: 0.24.2
+
+license: MIT
+
+dependencies:
+  clim:
+    github: at-grandpa/clim
+    version: 0.2.0
