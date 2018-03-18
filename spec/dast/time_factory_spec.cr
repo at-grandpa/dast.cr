@@ -47,6 +47,10 @@ describe Dast::TimeFactory do
           input:  "2018/03/18",
           expect: "2018-03-18 00:00:00",
         },
+        {
+          input:  "2018-03-18 12:34:56",
+          expect: "2018-03-18 12:34:56",
+        },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
           output = Dast::TimeFactory.new([] of String).format_for_time(spec_case[:input])
@@ -64,6 +68,12 @@ describe Dast::TimeFactory do
         },
         {
           input: "2018-03",
+        },
+        {
+          input: "2018-03-18 12:34",
+        },
+        {
+          input: "2018/03/18 12:34",
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
