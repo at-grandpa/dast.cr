@@ -36,14 +36,11 @@ describe Dast::TimeFactory do
     describe "raises an Exception, " do
       [
         {
-          arguments: [] of String,
-        },
-        {
           arguments: ["2018-03-18", "2018-03-19", "2018-03-20"],
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 2)") do
+          expect_raises(Exception, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
             Dast::TimeFactory.create_time_from_and_to(arguments: spec_case[:arguments])
           end
         end

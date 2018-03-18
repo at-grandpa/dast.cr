@@ -1,8 +1,20 @@
 module Dast
   class TimeFactory
     def self.create_time_from_and_to(arguments : Array(String))
-      raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 2)") unless arguments.size == 2
-      time_str1, time_str2 = arguments
+      case arguments.size
+      when 0
+        time_str1 = (Time.new - 3.day).to_s("%Y-%m-%d %H:%M:%S")
+        time_str2 = Time.new.to_s("%Y-%m-%d %H:%M:%S")
+      when 1
+        time_str1 = arguments.first?
+        time_str2 = Time.new.to_s("%Y-%m-%d %H:%M:%S")
+      when 2
+        time_str1, time_str2 = arguments
+      else
+        raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)") unless arguments.size <= 2
+      end
+      raise Exception.new("time_str1.nil?") if time_str1.nil?
+      raise Exception.new("time_str2.nil?") if time_str2.nil?
       time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
       time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
       if time1 < time2
