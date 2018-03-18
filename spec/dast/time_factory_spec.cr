@@ -41,12 +41,35 @@ describe Dast::TimeFactory do
       [
         {
           input:  "2018-03-18",
-          expect: "2018-03-18",
+          expect: "2018-03-18 00:00:00",
+        },
+        {
+          input:  "2018/03/18",
+          expect: "2018-03-18 00:00:00",
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
           output = Dast::TimeFactory.new([] of String).format_for_time(spec_case[:input])
           output.should eq spec_case[:expect]
+        end
+      end
+    end
+    describe "raises an Exception, " do
+      [
+        {
+          input: "20180318",
+        },
+        {
+          input: "2018",
+        },
+        {
+          input: "2018-03",
+        },
+      ].each do |spec_case|
+        it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
+          expect_raises(Exception, "Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]") do
+            Dast::TimeFactory.new([] of String).format_for_time(spec_case[:input])
+          end
         end
       end
     end
