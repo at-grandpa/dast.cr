@@ -3,7 +3,7 @@ module Dast
     def initialize(
       @from : Time,
       @to : Time,
-      @interval : Time::Span,
+      @interval : Time::MonthSpan | Time::Span,
       @format : String,
       @delimiter : String,
       @quote : String
@@ -11,8 +11,7 @@ module Dast
     end
 
     def display
-      @from.interval = @interval
-      (@from..@to).to_a.map { |time| @quote + time.to_s(@format) + @quote }.join(@delimiter)
+      @from.range(@to, @interval).to_a.map { |time| @quote + time.to_s(@format) + @quote }.join(@delimiter)
     end
   end
 end
