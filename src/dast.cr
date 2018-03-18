@@ -15,6 +15,8 @@ module Dast
         # [done] オプションから日付オブジェクト２つを返す
         # 特別なオプションからフォーマットを返す
         # クリップボード
+        # 各初期値
+        # +3 とか
         # [done] interval
         # [done] 日付オブジェクト２つを入れて、フォーマット指定して、delimiterとquote指定したら返す
         from, to = Dast::TimeFactory.create_time_from_and_to(arguments)
