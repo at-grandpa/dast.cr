@@ -1,14 +1,19 @@
 module Dast
   class TimeFactory
-    def initialize(@arguments : Array(String))
+    def self.create_time_from_and_to(arguments : Array(String))
+      raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 2)") unless arguments.size == 2
+      time_str1, time_str2 = arguments
+      time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
+      time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+      if time1 < time2
+        from, to = time1, time2
+      else
+        from, to = time2, time1
+      end
+      return from, to
     end
 
-    def create_time_from_and_to
-      raise Exception.new("Wrong number of arguments. (given #{@arguments.size}, expected 2)") unless @arguments.size == 2
-      return Time.parse("2018-03-18", "%F"), Time.parse("2018-03-19", "%F")
-    end
-
-    def format_for_time(input)
+    def self.format_for_time(input)
       splitted = input.split(" ")
       if splitted.size == 1
         ymd = splitted.first?
@@ -27,7 +32,7 @@ module Dast
       converted_ymd + " " + converted_hms
     end
 
-    def invalid_time_format!
+    def self.invalid_time_format!
       raise Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
     end
   end
