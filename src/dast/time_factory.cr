@@ -7,8 +7,14 @@ module Dast
         time_str2 = Time.new.to_s("%Y-%m-%d %H:%M:%S")
       when 1
         time_str1 = arguments.first?
+        # ここでtime_str1がdateかプラスマイナスかを判定する
+        # if plus_minus?(time_str1)
+        # else
+        # end
         time_str2 = Time.new.to_s("%Y-%m-%d %H:%M:%S")
       when 2
+        # どちらかがプラスマイナスだったら処理を分岐させる
+        # どちらもプラスマイナスだったらraise
         time_str1, time_str2 = arguments
       else
         raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)") unless arguments.size <= 2
@@ -46,6 +52,13 @@ module Dast
 
     def self.invalid_time_format!
       raise Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
+    end
+
+    def self.split_diff(diff : String)
+      diff.match(/\A([+\-])(\d+)(|[a-z]+?)\z/)
+    end
+
+    def self.calc_diff(time : Time, diff : String)
     end
   end
 end

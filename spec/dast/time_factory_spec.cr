@@ -95,4 +95,43 @@ describe Dast::TimeFactory do
       end
     end
   end
+  describe "#split_diff" do
+    [
+      {
+        input:  "+3",
+        expect: [
+          "+",
+          "3",
+          "",
+        ],
+      },
+    ].each do |spec_case|
+      describe "returns #{spec_case[:expect]}, " do
+        it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
+          match = Dast::TimeFactory.split_diff(spec_case[:input])
+          if match.nil?
+            match.should eq spec_case[:expect]
+          else
+            match[0].should eq spec_case[:expect][0]
+            match[1].should eq spec_case[:expect][1]
+            match[2].should eq spec_case[:expect][2]
+          end
+        end
+      end
+    end
+  end
+  # describe "#convert_plus_minus_to_time_span" do
+  #  [
+  #    {
+  #      input:  "+3",
+  #      expect: ,
+  #    },
+  #  ].each do |spec_case|
+  #    describe "returns #{spec_case[:expect]}, " do
+  #      it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
+  #        Dast::TimeFactory.convert_plus_minus_to_time_span(spec_case[:input]).should eq spec_case[:expect]
+  #      end
+  #    end
+  #  end
+  # end
 end

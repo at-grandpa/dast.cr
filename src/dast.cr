@@ -20,6 +20,7 @@ module Dast
         # あれがなかったらとか
         # [done] interval
         # [done] 日付オブジェクト２つを入れて、フォーマット指定して、delimiterとquote指定したら返す
+        # テストで、「returns hoge」のhogeをexpectにする
         from, to = Dast::TimeFactory.create_time_from_and_to(arguments)
         puts Dast::Display.new(
           from: from,

@@ -1,0 +1,5 @@
+puts "+3".match(/\A([+\-])(\d+)(|\.+?)\z/)
+puts "".match(/\A([+\-])(\d+)(|\.+?)\z/)
+puts "+3.day".match(/\A([+\-])(\d+)(|\w+?)\z/)
+puts "+3day".match(/\A([+\-])(\d+)(|\w+?)\z/)
+puts "+3Day".match(/\A([+\-])(\d+)(|[a-z]+?)\z/)
