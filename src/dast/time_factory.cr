@@ -55,7 +55,7 @@ module Dast
     end
 
     def self.split_diff(diff : String)
-      match = diff.match(/\A(?<plus_minus>[+\-])(?<value>\d+)(?<unit>|[a-z]+?)\z/)
+      match = diff.match(/\A(?<plus_minus>|\+|\-)(?<value>\d+)(?<unit>|[a-z]+?)\z/)
       invalid_diff_format! if match.nil?
       plus_minus = match.to_h["plus_minus"]?
       value = match.to_h["value"]?
@@ -63,7 +63,8 @@ module Dast
       invalid_diff_format! if plus_minus.nil?
       invalid_diff_format! if value.nil?
       invalid_diff_format! if unit.nil?
-      if plus_minus == "+"
+      case plus_minus
+      when "+", ""
         diff = convert_time_span(value.to_i32, unit)
       else
         diff = convert_time_span(value.to_i32 * -1, unit)
@@ -81,7 +82,7 @@ module Dast
         value.day
       when "hour", "h"
         value.hour
-      when "minute", "min" , "m"
+      when "minute", "min", "m"
         value.minute
       when "second", "sec", "s"
         value.second
@@ -91,6 +92,7 @@ module Dast
     end
 
     def self.calc_diff(time : Time, diff : String)
+      time + split_diff(diff)
     end
 
     def self.invalid_diff_format!

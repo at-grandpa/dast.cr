@@ -98,6 +98,10 @@ describe Dast::TimeFactory do
   describe "#split_diff" do
     [
       {
+        input:  "3",
+        expect: 3.day,
+      },
+      {
         input:  "+3",
         expect: 3.day,
       },
@@ -164,6 +168,10 @@ describe Dast::TimeFactory do
       {
         input:  "+10",
         expect: 10.day,
+      },
+      {
+        input:  "-10",
+        expect: -10.day,
       },
     ].each do |spec_case|
       describe "returns #{spec_case[:expect]}, " do
