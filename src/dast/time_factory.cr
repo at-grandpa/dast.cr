@@ -3,35 +3,38 @@ module Dast
     def self.create_time_from_and_to(arguments : Array(String))
       case arguments.size
       when 0
-        time_str1 = (Time.new - 3.day).to_s("%Y-%m-%d %H:%M:%S")
-        time_str2 = Time.new.to_s("%Y-%m-%d %H:%M:%S")
+        # default
+        time1 = Time.new
+        time2 = (Time.new - 3.day)
       when 1
-        time_str1 = arguments.first?
-        # ここでtime_str1がdateかプラスマイナスかを判定する
-        # if plus_minus?(time_str1)
-        # else
-        # end
-        time_str2 = Time.new.to_s("%Y-%m-%d %H:%M:%S")
+        arg = arguments.first?
+        invalid_diff_format! if arg.nil?
+        if diff?(arg)
+          time1 = Time.new
+          time2 = calc_diff(Time.new, arg)
+        else
+          time1 = Time.new
+          time2 = Time.parse(format_for_time(arg), "%Y-%m-%d %H:%M:%S")
+        end
       when 2
-        # どちらかがプラスマイナスだったら処理を分岐させる
-        # どちらもプラスマイナスだったらraise
         time_str1, time_str2 = arguments
+        time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
+        time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
       else
-        raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)") unless arguments.size <= 2
+        raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)")
       end
-      raise Exception.new("time_str1.nil?") if time_str1.nil?
-      raise Exception.new("time_str2.nil?") if time_str2.nil?
-      time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
-      time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+
       if time1 < time2
         from, to = time1, time2
       else
         from, to = time2, time1
       end
+
       return from, to
     end
 
     def self.format_for_time(input)
+      invalid_time_format! if input.nil?
       splitted = input.split(" ")
       if splitted.size == 1
         ymd = splitted.first?
@@ -52,6 +55,10 @@ module Dast
 
     def self.invalid_time_format!
       raise Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
+    end
+
+    def self.diff?(input)
+      !!input.match(/\A(?<plus_minus>|\+|\-)(?<value>\d+)(?<unit>|[a-z]+?)\z/)
     end
 
     def self.split_diff(diff : String)
@@ -91,7 +98,7 @@ module Dast
       end
     end
 
-    def self.calc_diff(time : Time, diff : String)
+    def self.calc_diff(time : Time, diff : String) : Time
       time + split_diff(diff)
     end
 

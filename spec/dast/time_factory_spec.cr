@@ -185,6 +185,15 @@ describe Dast::TimeFactory do
       {
         input: "foo",
       },
+      {
+        input: "+3dayfoo",
+      },
+      {
+        input: "+3day foo",
+      },
+      {
+        input: "+3.day",
+      },
     ].each do |spec_case|
       describe "raises an Exception, " do
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
@@ -195,18 +204,39 @@ describe Dast::TimeFactory do
       end
     end
   end
-  # describe "#convert_plus_minus_to_time_span" do
-  #  [
-  #    {
-  #      input:  "+3",
-  #      expect: ,
-  #    },
-  #  ].each do |spec_case|
-  #    describe "returns #{spec_case[:expect]}, " do
-  #      it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-  #        Dast::TimeFactory.convert_plus_minus_to_time_span(spec_case[:input]).should eq spec_case[:expect]
-  #      end
-  #    end
-  #  end
-  # end
+  describe "#calc_diff" do
+    [
+      {
+        time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        diff:   "3",
+        expect: Time.parse("2018-03-23 00:00:00", "%Y-%m-%d %H:%M:%S"),
+      },
+      {
+        time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        diff:   "+3",
+        expect: Time.parse("2018-03-23 00:00:00", "%Y-%m-%d %H:%M:%S"),
+      },
+      {
+        time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        diff:   "+3y",
+        expect: Time.parse("2021-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+      },
+      {
+        time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        diff:   "-3m",
+        expect: Time.parse("2018-03-19 23:57:00", "%Y-%m-%d %H:%M:%S"),
+      },
+      {
+        time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        diff:   "-3h",
+        expect: Time.parse("2018-03-19 21:00:00", "%Y-%m-%d %H:%M:%S"),
+      },
+    ].each do |spec_case|
+      describe "returns #{spec_case[:expect]}, " do
+        it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
+          Dast::TimeFactory.calc_diff(spec_case[:time], spec_case[:diff]).should eq spec_case[:expect]
+        end
+      end
+    end
+  end
 end
