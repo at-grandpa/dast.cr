@@ -99,12 +99,71 @@ describe Dast::TimeFactory do
     [
       {
         input:  "+3",
-        expect: {
-                     0 => "+3",
-          "plus_minus" => "+",
-          "value"      => "3",
-          "unit"       => "",
-        },
+        expect: 3.day,
+      },
+      {
+        input:  "-3",
+        expect: -3.day,
+      },
+      {
+        input:  "+3year",
+        expect: 3.year,
+      },
+      {
+        input:  "+3y",
+        expect: 3.year,
+      },
+      {
+        input:  "+3month",
+        expect: 3.month,
+      },
+      {
+        input:  "+3mon",
+        expect: 3.month,
+      },
+      {
+        input:  "+3day",
+        expect: 3.day,
+      },
+      {
+        input:  "+3d",
+        expect: 3.day,
+      },
+      {
+        input:  "+3hour",
+        expect: 3.hour,
+      },
+      {
+        input:  "+3h",
+        expect: 3.hour,
+      },
+      {
+        input:  "+3minute",
+        expect: 3.minute,
+      },
+      {
+        input:  "+3min",
+        expect: 3.minute,
+      },
+      {
+        input:  "+3m",
+        expect: 3.minute,
+      },
+      {
+        input:  "+3second",
+        expect: 3.second,
+      },
+      {
+        input:  "+3sec",
+        expect: 3.second,
+      },
+      {
+        input:  "+3s",
+        expect: 3.second,
+      },
+      {
+        input:  "+10",
+        expect: 10.day,
       },
     ].each do |spec_case|
       describe "returns #{spec_case[:expect]}, " do
