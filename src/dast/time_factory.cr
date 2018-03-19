@@ -55,7 +55,9 @@ module Dast
     end
 
     def self.split_diff(diff : String)
-      diff.match(/\A([+\-])(\d+)(|[a-z]+?)\z/)
+      match = diff.match(/\A(?<plus_minus>[+\-])(?<value>\d+)(?<unit>|[a-z]+?)\z/)
+      raise Exception.new("Invalid diff format. Please /[+-]\d(year|month|day|hour|minute|second)?/") if match.nil?
+      match.to_h
     end
 
     def self.calc_diff(time : Time, diff : String)

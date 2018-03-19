@@ -99,22 +99,30 @@ describe Dast::TimeFactory do
     [
       {
         input:  "+3",
-        expect: [
-          "+",
-          "3",
-          "",
-        ],
+        expect: {
+                     0 => "+3",
+          "plus_minus" => "+",
+          "value"      => "3",
+          "unit"       => "",
+        },
       },
     ].each do |spec_case|
       describe "returns #{spec_case[:expect]}, " do
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
           match = Dast::TimeFactory.split_diff(spec_case[:input])
-          if match.nil?
-            match.should eq spec_case[:expect]
-          else
-            match[0].should eq spec_case[:expect][0]
-            match[1].should eq spec_case[:expect][1]
-            match[2].should eq spec_case[:expect][2]
+          match.should eq spec_case[:expect]
+        end
+      end
+    end
+    [
+      {
+        input: "foo",
+      },
+    ].each do |spec_case|
+      describe "raises an Exception, " do
+        it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
+          expect_raises(Exception, "Invalid diff format. Please /[+\-]\d(year|month|day|hour|minute|second)?/") do
+            Dast::TimeFactory.split_diff(spec_case[:input])
           end
         end
       end
