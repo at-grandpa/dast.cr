@@ -5,27 +5,27 @@ describe Dast::Interval do
     describe "returns Time::Span object, " do
       [
         {
-          str:    "1.year",
+          str:    "1year",
           expect: 1.year,
         },
         {
-          str:    "2.month",
+          str:    "2month",
           expect: 2.month,
         },
         {
-          str:    "3.day",
+          str:    "3day",
           expect: 3.day,
         },
         {
-          str:    "4.hour",
+          str:    "4hour",
           expect: 4.hour,
         },
         {
-          str:    "5.minute",
+          str:    "5minute",
           expect: 5.minute,
         },
         {
-          str:    "6.second",
+          str:    "6second",
           expect: 6.second,
         },
       ].each do |spec_case|
@@ -37,14 +37,17 @@ describe Dast::Interval do
     describe "raises an UnitException, " do
       [
         {
-          str:    "1.foo",
+          str: "1.day",
         },
         {
-          str:    "1.bar",
+          str: "1.foo",
+        },
+        {
+          str: "1.bar",
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Only [year|month|day|hour|minute|second] is allowed for the interval unit. Not supported [#{spec_case[:str].split(".")[1]}].") do
+          expect_raises(Exception, "Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].") do
             Dast::Interval.new(str: spec_case[:str]).value
           end
         end
@@ -53,29 +56,29 @@ describe Dast::Interval do
     describe "raises an InvalidValueException, " do
       [
         {
-          str:    "1",
+          str: "1",
         },
         {
-          str:    "foo",
+          str: "foo",
         },
         {
-          str:    "1.foo.bar",
+          str: "1.foo.bar",
         },
         {
-          str:    "1.1.foo",
+          str: "1.1.foo",
         },
         {
-          str:    "1.1.foo",
+          str: "1.1.foo",
         },
         {
-          str:    "1-1.foo",
+          str: "1-1.foo",
         },
         {
-          str:    "foo.bar",
+          str: "foo.bar",
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Invalid 'interval' argument. The syntax of the '--interval' is {Int}.[year|month|day|hour|minute|second].") do
+          expect_raises(Exception, "Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].") do
             Dast::Interval.new(str: spec_case[:str]).value
           end
         end
