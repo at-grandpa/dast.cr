@@ -106,7 +106,7 @@ describe Dast::TimeFactory do
         expect: 3.day,
       },
       {
-        input:  "-3",
+        input:  "~3",
         expect: -3.day,
       },
       {
@@ -170,7 +170,7 @@ describe Dast::TimeFactory do
         expect: 10.day,
       },
       {
-        input:  "-10",
+        input:  "~10",
         expect: -10.day,
       },
     ].each do |spec_case|
@@ -223,12 +223,12 @@ describe Dast::TimeFactory do
       },
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
-        diff:   "-3m",
+        diff:   "~3m",
         expect: Time.parse("2018-03-19 23:57:00", "%Y-%m-%d %H:%M:%S"),
       },
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
-        diff:   "-3h",
+        diff:   "~3h",
         expect: Time.parse("2018-03-19 21:00:00", "%Y-%m-%d %H:%M:%S"),
       },
     ].each do |spec_case|

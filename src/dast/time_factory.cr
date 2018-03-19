@@ -57,12 +57,13 @@ module Dast
       raise Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
     end
 
+    DIFF_PATTERN = /\A(?<plus_minus>|\+|\~)(?<value>\d+)(?<unit>|[a-z]+?)\z/
     def self.diff?(input)
-      !!input.match(/\A(?<plus_minus>|\+|\-)(?<value>\d+)(?<unit>|[a-z]+?)\z/)
+      !!input.match(DIFF_PATTERN)
     end
 
     def self.split_diff(diff : String)
-      match = diff.match(/\A(?<plus_minus>|\+|\-)(?<value>\d+)(?<unit>|[a-z]+?)\z/)
+      match = diff.match(DIFF_PATTERN)
       invalid_diff_format! if match.nil?
       plus_minus = match.to_h["plus_minus"]?
       value = match.to_h["value"]?
