@@ -71,43 +71,6 @@ module Dast
       !!input.match(DIFF_PATTERN)
     end
 
-    def self.split_diff(diff : String)
-      match = diff.match(DIFF_PATTERN)
-      invalid_diff_format! if match.nil?
-      plus_minus = match.to_h["plus_minus"]?
-      value = match.to_h["value"]?
-      unit = match.to_h["unit"]?
-      invalid_diff_format! if plus_minus.nil?
-      invalid_diff_format! if value.nil?
-      invalid_diff_format! if unit.nil?
-      case plus_minus
-      when "+", ""
-        diff = convert_time_span(value.to_i32 - 1 , unit)
-      else
-        diff = convert_time_span((value.to_i32 - 1) * -1, unit)
-      end
-      diff
-    end
-
-    def self.convert_time_span(value : Int32, unit : String)
-      case unit
-      when "year", "y"
-        value.year
-      when "month", "mon"
-        value.month
-      when "day", "d", ""
-        value.day
-      when "hour", "h"
-        value.hour
-      when "minute", "min", "m"
-        value.minute
-      when "second", "sec", "s"
-        value.second
-      else
-        raise Exception.new("Invalid diff format. Please /[+-]\d(year|month|day|hour|minute|second)?/")
-      end
-    end
-
     def self.calc_diff(time : Time, diff : String) : Time
       time + Dast::Span::Diff.new(diff).to_time_span
     end
