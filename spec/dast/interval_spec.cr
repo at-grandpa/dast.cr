@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-describe Dast::Span::Interval do
+describe Dast::PatternValues::Span::Interval do
   describe "#value" do
     describe "returns Time::Span object, " do
       [
@@ -30,7 +30,7 @@ describe Dast::Span::Interval do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          Dast::Span::Interval.new(input: spec_case[:str]).to_time_span.should eq spec_case[:expect]
+          Dast::PatternValues::Span::Interval.new(input: spec_case[:str]).to_time_span.should eq spec_case[:expect]
         end
       end
     end
@@ -48,7 +48,7 @@ describe Dast::Span::Interval do
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
           expect_raises(Exception, "Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].") do
-            Dast::Span::Interval.new(input: spec_case[:str]).to_time_span
+            Dast::PatternValues::Span::Interval.new(input: spec_case[:str]).to_time_span
           end
         end
       end
@@ -79,7 +79,7 @@ describe Dast::Span::Interval do
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
           expect_raises(Exception, "Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].") do
-            Dast::Span::Interval.new(input: spec_case[:str]).to_time_span
+            Dast::PatternValues::Span::Interval.new(input: spec_case[:str]).to_time_span
           end
         end
       end

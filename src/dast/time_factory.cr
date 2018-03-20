@@ -17,48 +17,31 @@ module Dast
 
     def self.arguments_size_one(now : Time, arguments : Array(String)) : Tuple(Time, Time)
       arg = arguments.first?
-      d = Dast::Span::Diff.new(arg)
-      another = d.diff? ? d.add(now) : Time.parse(format_for_time(arg), "%Y-%m-%d %H:%M:%S")
+      d = Dast::PatternValues::Span::Diff.new(arg)
+      another = d.diff? ? d.add(now) : Time.parse(normalize_date_time(arg), "%Y-%m-%d %H:%M:%S")
       return now, another
     end
 
     def self.arguments_size_two(now : Time, arguments : Array(String)) : Tuple(Time, Time)
       arg1, arg2 = arguments
-      diff1 = Dast::Span::Diff.new(arg1)
-      diff2 = Dast::Span::Diff.new(arg2)
+      diff1 = Dast::PatternValues::Span::Diff.new(arg1)
+      diff2 = Dast::PatternValues::Span::Diff.new(arg2)
       case
       when diff1.diff?
-        time2 = Time.parse(format_for_time(arg2), "%Y-%m-%d %H:%M:%S")
+        time2 = Time.parse(normalize_date_time(arg2), "%Y-%m-%d %H:%M:%S")
         time1 = diff1.add(time2)
       when diff2.diff?
-        time1 = Time.parse(format_for_time(arg1), "%Y-%m-%d %H:%M:%S")
+        time1 = Time.parse(normalize_date_time(arg1), "%Y-%m-%d %H:%M:%S")
         time2 = diff2.add(time1)
       else
-        time1 = Time.parse(format_for_time(arg1), "%Y-%m-%d %H:%M:%S")
-        time2 = Time.parse(format_for_time(arg2), "%Y-%m-%d %H:%M:%S")
+        time1 = Time.parse(normalize_date_time(arg1), "%Y-%m-%d %H:%M:%S")
+        time2 = Time.parse(normalize_date_time(arg2), "%Y-%m-%d %H:%M:%S")
       end
       return time1, time2
     end
 
-    def self.pattern
-      /\A(?<ymd>\d{4}[\/-]\d{2}[\/-]\d{2}) ?(?<hms>|\d{2}:\d{2}:\d{2})\z/
-    end
-
-    def self.format_for_time(input)
-      invalid_time_format! if input.nil?
-      match = input.match(pattern)
-      invalid_time_format! if match.nil?
-      ymd = match.to_h["ymd"]?
-      hms = match.to_h["hms"]?
-      invalid_time_format! unless !ymd.nil? && !hms.nil?
-      hms = hms.empty? ? "00:00:00" : hms
-      converted_ymd = ymd.gsub(/\//, "-")
-      converted_hms = hms.gsub(/::/, ":")
-      converted_ymd + " " + converted_hms
-    end
-
-    def self.invalid_time_format!
-      raise Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
+    def self.normalize_date_time(input)
+      Dast::PatternValues::DateTime.new(input).normalize_date_time
     end
   end
 end

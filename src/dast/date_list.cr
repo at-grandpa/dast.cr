@@ -1,4 +1,4 @@
-require "./span/*"
+require "./pattern_values/*"
 
 module Dast
   class DateList
@@ -14,7 +14,7 @@ module Dast
 
     def to_s
       from, to = Dast::TimeFactory.create_times(@now, @arguments)
-      interval = Dast::Span::Interval.new(@interval).to_time_span
+      interval = Dast::PatternValues::Span::Interval.new(@interval).to_time_span
       from.range(to, interval).to_a.map { |time| @quote + time.to_s(@format) + @quote }.join(@delimiter)
     end
   end

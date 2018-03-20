@@ -51,7 +51,7 @@ describe Dast::TimeFactory do
       end
     end
   end
-  describe "#format_for_time" do
+  describe "#normalize_date_time" do
     describe "returns string for Time.parse, " do
       [
         {
@@ -68,7 +68,7 @@ describe Dast::TimeFactory do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          output = Dast::TimeFactory.format_for_time(spec_case[:input])
+          output = Dast::TimeFactory.normalize_date_time(spec_case[:input])
           output.should eq spec_case[:expect]
         end
       end
@@ -93,7 +93,7 @@ describe Dast::TimeFactory do
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
           expect_raises(Exception, "Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]") do
-            Dast::TimeFactory.format_for_time(spec_case[:input])
+            Dast::TimeFactory.normalize_date_time(spec_case[:input])
           end
         end
       end
