@@ -1,3 +1,5 @@
+require "./span/*"
+
 module Dast
   class DateList
     def initialize(
@@ -15,7 +17,7 @@ module Dast
       Dast::Display.new(
         from: from,
         to: to,
-        interval: Dast::Interval.new(@interval).value,
+        interval: Dast::Span::Interval.new(@interval).to_time_span,
         format: @format,
         delimiter: @delimiter,
         quote: @quote
