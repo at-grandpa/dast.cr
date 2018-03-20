@@ -12,7 +12,7 @@ module Dast
       option "-d DELIM", "--delimiter DELIM", type: String, desc: "Delimiter.", default: ","
       option "-q QUOTE", "--quote QUOTE", type: String, desc: "Quote.", default: "'"
       run do |options, arguments|
-        puts Dast::DateList.new(
+        print Dast::DateList.new(
           now: Time.new,
           interval: options.interval,
           format: options.format,
