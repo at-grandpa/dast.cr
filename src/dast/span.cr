@@ -10,6 +10,15 @@ module Dast
     abstract def to_time_span
     abstract def invalid_format_exception
 
+    def match_values
+      Dast::Util.match_values(
+        input: @input,
+        pattern: pattern,
+        keys: pattern_keys,
+        exception: invalid_format_exception
+      )
+    end
+
     def convert_time_span(
       value : Int32,
       unit : String,

@@ -18,15 +18,6 @@ module Dast
         convert_time_span(span_value, unit, {patterns: [""], default_time_span: span_value.day})
       end
 
-      def match_values
-        Dast::Util.match_values(
-          input: @input,
-          pattern: pattern,
-          keys: pattern_keys,
-          exception: invalid_format_exception
-        )
-      end
-
       def invalid_format_exception
         Exception.new("Invalid diff format. Please /[+-]\d(year|month|day|hour|minute|second)?/")
       end
