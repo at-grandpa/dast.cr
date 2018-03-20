@@ -32,19 +32,19 @@ module Dast
     end
 
     def self.arguments_size_two(now : Time, arguments : Array(String)) : Tuple(Time, Time)
-      time_str1, time_str2 = arguments
-      diff1 = Dast::Span::Diff.new(time_str1)
-      diff2 = Dast::Span::Diff.new(time_str2)
+      arg1, arg2 = arguments
+      diff1 = Dast::Span::Diff.new(arg1)
+      diff2 = Dast::Span::Diff.new(arg2)
       case
       when diff1.diff?
-        time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+        time2 = Time.parse(format_for_time(arg2), "%Y-%m-%d %H:%M:%S")
         time1 = diff1.add(time2)
       when diff2.diff?
-        time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
+        time1 = Time.parse(format_for_time(arg1), "%Y-%m-%d %H:%M:%S")
         time2 = diff2.add(time1)
       else
-        time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
-        time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+        time1 = Time.parse(format_for_time(arg1), "%Y-%m-%d %H:%M:%S")
+        time2 = Time.parse(format_for_time(arg2), "%Y-%m-%d %H:%M:%S")
       end
       return time1, time2
     end
