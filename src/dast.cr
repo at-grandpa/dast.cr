@@ -12,6 +12,9 @@ module Dast
       option "-d DELIM", "--delimiter DELIM", type: String, desc: "Delimiter.", default: ","
       option "-q QUOTE", "--quote QUOTE", type: String, desc: "Quote.", default: "'"
       run do |options, arguments|
+        # 3d だと 三日間ほしいから、出力が３日になるようにする（現状４日間出る）
+        # rescue
+        # last week とかやる？
         print Dast::DateList.new(
           now: Time.new,
           interval: options.interval,
