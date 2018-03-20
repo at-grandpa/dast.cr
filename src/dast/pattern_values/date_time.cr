@@ -14,11 +14,11 @@ module Dast
       end
 
       def normalize_date_time
-      ymd, hms = match_values
-      hms = hms.empty? ? "00:00:00" : hms
-      converted_ymd = ymd.gsub(/\//, "-")
-      converted_hms = hms.gsub(/::/, ":")
-      converted_ymd + " " + converted_hms
+        ymd, hms = match_values
+        hms = hms.empty? ? "00:00:00" : hms
+        converted_ymd = ymd.gsub(/\//, "-")
+        converted_hms = hms.gsub(/::/, ":")
+        converted_ymd + " " + converted_hms
       end
     end
   end
