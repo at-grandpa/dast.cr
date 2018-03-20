@@ -1,19 +1,19 @@
 module Dast
   class TimeFactory
-    def self.create_time_from_and_to(arguments : Array(String))
+    def self.create_time_from_and_to(now : Time, arguments : Array(String))
       case arguments.size
       when 0
         # default
-        time1 = Time.new
-        time2 = (Time.new - 3.day)
+        time1 = now
+        time2 = (now - 6.day) # 1 week ago.
       when 1
         arg = arguments.first?
         invalid_diff_format! if arg.nil?
         if diff?(arg)
-          time1 = Time.new
-          time2 = calc_diff(Time.new, arg)
+          time1 = now
+          time2 = calc_diff(now, arg)
         else
-          time1 = Time.new
+          time1 = now
           time2 = Time.parse(format_for_time(arg), "%Y-%m-%d %H:%M:%S")
         end
       when 2

@@ -1,6 +1,7 @@
 module Dast
   class DateList
     def initialize(
+      @now : Time,
       @interval : String,
       @format : String,
       @delimiter : String,
@@ -10,7 +11,7 @@ module Dast
     end
 
     def to_s
-      from, to = Dast::TimeFactory.create_time_from_and_to(@arguments)
+      from, to = Dast::TimeFactory.create_time_from_and_to(@now, @arguments)
       Dast::Display.new(
         from: from,
         to: to,
