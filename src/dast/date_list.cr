@@ -14,14 +14,8 @@ module Dast
 
     def to_s
       from, to = Dast::TimeFactory.create_times(@now, @arguments)
-      Dast::Display.new(
-        from: from,
-        to: to,
-        interval: Dast::Span::Interval.new(@interval).to_time_span,
-        format: @format,
-        delimiter: @delimiter,
-        quote: @quote
-      ).display
+      interval = Dast::Span::Interval.new(@interval).to_time_span
+      from.range(to, interval).to_a.map { |time| @quote + time.to_s(@format) + @quote }.join(@delimiter)
     end
   end
 end
