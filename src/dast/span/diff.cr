@@ -13,16 +13,12 @@ module Dast
         plus_minus = match.to_h["plus_minus"]?
         value = match.to_h["value"]?
         unit = match.to_h["unit"]?
-        invalid_format! if plus_minus.nil?
-        invalid_format! if value.nil?
-        invalid_format! if unit.nil?
-        case plus_minus
-        when "+", ""
-          diff = convert_time_span(value.to_i32 - 1, unit, {patterns: [""], default_time_span: (value.to_i32 - 1).day})
-        else
-          diff = convert_time_span((value.to_i32 - 1) * -1, unit, {patterns: [""], default_time_span: ((value.to_i32 - 1) * -1).day})
-        end
-        diff
+        invalid_format! unless !plus_minus.nil? && !value.nil? && !unit.nil?
+        span_value = case plus_minus
+                     when "+", "" then (value.to_i32 - 1)
+                     else              (value.to_i32 - 1) * -1
+                     end
+        convert_time_span(span_value, unit, {patterns: [""], default_time_span: span_value.day})
       end
 
       def invalid_format!

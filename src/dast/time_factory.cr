@@ -59,8 +59,7 @@ module Dast
       invalid_time_format! if match.nil?
       ymd = match.to_h["ymd"]?
       hms = match.to_h["hms"]?
-      invalid_time_format! if ymd.nil?
-      invalid_time_format! if hms.nil?
+      invalid_time_format! unless !ymd.nil? && !hms.nil?
       hms = hms.empty? ? "00:00:00" : hms
       converted_ymd = ymd.gsub(/\//, "-")
       converted_hms = hms.gsub(/::/, ":")
