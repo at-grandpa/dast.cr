@@ -29,7 +29,7 @@ module Dast
         value.second
       else
         unless default.nil?
-          if default[:pattern].includes?(unit)
+          if default[:patterns].includes?(unit)
             return default[:default_time_span]
           end
         end

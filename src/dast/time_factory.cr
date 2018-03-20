@@ -109,7 +109,7 @@ module Dast
     end
 
     def self.calc_diff(time : Time, diff : String) : Time
-      time + split_diff(diff)
+      time + Dast::Span::Diff.new(diff).to_time_span
     end
 
     def self.invalid_diff_format!
