@@ -41,7 +41,7 @@ module Dast
     end
 
     def self.normalize_date_time(input)
-      Dast::PatternValues::DateTime.new(input).normalize_date_time
+      Dast::PatternValues::DateTime.new(input).normalize
     end
   end
 end

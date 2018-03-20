@@ -13,7 +13,7 @@ module Dast
         Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
       end
 
-      def normalize_date_time
+      def normalize
         ymd, hms = match_values
         hms = hms.empty? ? "00:00:00" : hms
         converted_ymd = ymd.gsub(/\//, "-")
