@@ -14,7 +14,7 @@ module Dast
       run do |options, arguments|
         puts Dast::DateList.new(
           now: Time.new,
-          interval: Dast::Interval.new(options.interval).value,
+          interval: options.interval,
           format: options.format,
           delimiter: options.delimiter,
           quote: options.quote,
