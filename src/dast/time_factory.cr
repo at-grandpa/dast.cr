@@ -34,11 +34,7 @@ module Dast
         raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)")
       end
 
-      if time1 < time2
-        from, to = time1, time2
-      else
-        from, to = time2, time1
-      end
+      from, to = time1 < time2 ? [time1, time2] : [time2, time1]
 
       return from, to
     end
