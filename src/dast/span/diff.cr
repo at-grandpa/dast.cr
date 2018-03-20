@@ -26,6 +26,14 @@ module Dast
       def invalid_format!
         raise Exception.new("Invalid diff format. Please /[+-]\d(year|month|day|hour|minute|second)?/")
       end
+
+      def add(time : Time)
+        time + to_time_span
+      end
+
+      def diff?
+        !!@input.match(pattern)
+      end
     end
   end
 end

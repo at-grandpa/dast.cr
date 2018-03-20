@@ -9,21 +9,24 @@ module Dast
       when 1
         arg = arguments.first?
         invalid_diff_format! if arg.nil?
-        if diff?(arg)
+        d = Dast::Span::Diff.new(arg)
+        if d.diff?
           time1 = now
-          time2 = calc_diff(now, arg)
+          time2 = d.add(time1)
         else
           time1 = now
           time2 = Time.parse(format_for_time(arg), "%Y-%m-%d %H:%M:%S")
         end
       when 2
         time_str1, time_str2 = arguments
-        if diff?(time_str1)
+        diff1 = Dast::Span::Diff.new(time_str1)
+        diff2 = Dast::Span::Diff.new(time_str2)
+        if diff1.diff?
           time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
-          time1 = calc_diff(time2, time_str1)
-        elsif diff?(time_str2)
+          time1 = diff1.add(time2)
+        elsif diff2.diff?
           time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
-          time2 = calc_diff(time1, time_str2)
+          time2 = diff2.add(time1)
         else
           time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
           time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
@@ -66,14 +69,6 @@ module Dast
     end
 
     DIFF_PATTERN = /\A(?<plus_minus>|\+|\~)(?<value>\d+)(?<unit>|[a-z]+?)\z/
-
-    def self.diff?(input)
-      !!input.match(DIFF_PATTERN)
-    end
-
-    def self.calc_diff(time : Time, diff : String) : Time
-      time + Dast::Span::Diff.new(diff).to_time_span
-    end
 
     def self.invalid_diff_format!
       raise Exception.new("Invalid diff format. Please /[+-]\d(year|month|day|hour|minute|second)?/")
