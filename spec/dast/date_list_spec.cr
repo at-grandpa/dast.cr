@@ -340,7 +340,7 @@ describe Dast::DateList do
     #   ].each do |spec_case|
     #     it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
     #       expect_raises(Exception, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
-    #         Dast::TimeFactory.create_time_from_and_to(arguments: spec_case[:arguments])
+    #         Dast::TimeFactory.create_times(arguments: spec_case[:arguments])
     #       end
     #     end
     #   end
