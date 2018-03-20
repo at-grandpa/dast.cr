@@ -18,8 +18,16 @@ module Dast
         end
       when 2
         time_str1, time_str2 = arguments
-        time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
-        time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+        if diff?(time_str1)
+          time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+          time1 = calc_diff(time2, time_str1)
+        elsif diff?(time_str2)
+          time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
+          time2 = calc_diff(time1, time_str2)
+        else
+          time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
+          time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
+        end
       else
         raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)")
       end
@@ -58,6 +66,7 @@ module Dast
     end
 
     DIFF_PATTERN = /\A(?<plus_minus>|\+|\~)(?<value>\d+)(?<unit>|[a-z]+?)\z/
+
     def self.diff?(input)
       !!input.match(DIFF_PATTERN)
     end
