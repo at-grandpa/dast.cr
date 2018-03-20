@@ -8,27 +8,18 @@ module Dast
                      else        raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)")
                      end
 
-      from, to = time1 < time2 ? [time1, time2] : [time2, time1]
-      return from, to
+      time1 < time2 ? [time1, time2] : [time2, time1]
     end
 
     def self.arguments_size_zero(now : Time) : Tuple(Time, Time)
-      time1 = now
-      time2 = (time1 - 6.day) # 1 week ago.
-      return time1, time2
+      return now, (now - 6.day) # 1 week ago.
     end
 
     def self.arguments_size_one(now : Time, arguments : Array(String)) : Tuple(Time, Time)
       arg = arguments.first?
       d = Dast::Span::Diff.new(arg)
-      if d.diff?
-        time1 = now
-        time2 = d.add(time1)
-      else
-        time1 = now
-        time2 = Time.parse(format_for_time(arg), "%Y-%m-%d %H:%M:%S")
-      end
-      return time1, time2
+      another = d.diff? ? d.add(now) : Time.parse(format_for_time(arg), "%Y-%m-%d %H:%M:%S")
+      return now, another
     end
 
     def self.arguments_size_two(now : Time, arguments : Array(String)) : Tuple(Time, Time)

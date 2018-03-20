@@ -5,20 +5,26 @@ module Dast
         /\A(?<value>\d+)(?<unit>|[a-z]+?)\z/
       end
 
+      def pattern_keys
+        ["value", "unit"]
+      end
+
       def to_time_span : Time::MonthSpan | Time::Span
-        input = @input
-        invalid_format! if input.nil?
-        match = input.match(pattern)
-        invalid_format! if match.nil?
-        value = match.to_h["value"]?
-        unit = match.to_h["unit"]?
-        invalid_format! if value.nil?
-        invalid_format! if unit.nil?
+        value, unit = match_values
         convert_time_span(value.to_i32, unit)
       end
 
-      def invalid_format!
-        raise Exception.new("Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].")
+      def match_values
+        Dast::Util.match_values(
+          input: @input,
+          pattern: pattern,
+          keys: pattern_keys,
+          exception: invalid_format_exception
+        )
+      end
+
+      def invalid_format_exception
+        Exception.new("Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].")
       end
     end
   end

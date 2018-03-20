@@ -6,8 +6,9 @@ module Dast
     end
 
     abstract def pattern
+    abstract def pattern_keys
     abstract def to_time_span
-    abstract def invalid_format!
+    abstract def invalid_format_exception
 
     def convert_time_span(
       value : Int32,
@@ -28,12 +29,8 @@ module Dast
       when "second", "sec", "s"
         value.second
       else
-        unless default.nil?
-          if default[:patterns].includes?(unit)
-            return default[:default_time_span]
-          end
-        end
-        invalid_format!
+        return default[:default_time_span] if !default.nil? && default[:patterns].includes?(unit)
+        raise invalid_format_exception
       end
     end
   end
