@@ -103,79 +103,79 @@ describe Dast::TimeFactory do
     [
       {
         input:  "3",
-        expect: 3.day,
+        expect: 2.day,
       },
       {
         input:  "+3",
-        expect: 3.day,
+        expect: 2.day,
       },
       {
         input:  "~3",
-        expect: -3.day,
+        expect: -2.day,
       },
       {
         input:  "+3year",
-        expect: 3.year,
+        expect: 2.year,
       },
       {
         input:  "+3y",
-        expect: 3.year,
+        expect: 2.year,
       },
       {
         input:  "+3month",
-        expect: 3.month,
+        expect: 2.month,
       },
       {
         input:  "+3mon",
-        expect: 3.month,
+        expect: 2.month,
       },
       {
         input:  "+3day",
-        expect: 3.day,
+        expect: 2.day,
       },
       {
         input:  "+3d",
-        expect: 3.day,
+        expect: 2.day,
       },
       {
         input:  "+3hour",
-        expect: 3.hour,
+        expect: 2.hour,
       },
       {
         input:  "+3h",
-        expect: 3.hour,
+        expect: 2.hour,
       },
       {
         input:  "+3minute",
-        expect: 3.minute,
+        expect: 2.minute,
       },
       {
         input:  "+3min",
-        expect: 3.minute,
+        expect: 2.minute,
       },
       {
         input:  "+3m",
-        expect: 3.minute,
+        expect: 2.minute,
       },
       {
         input:  "+3second",
-        expect: 3.second,
+        expect: 2.second,
       },
       {
         input:  "+3sec",
-        expect: 3.second,
+        expect: 2.second,
       },
       {
         input:  "+3s",
-        expect: 3.second,
+        expect: 2.second,
       },
       {
         input:  "+10",
-        expect: 10.day,
+        expect: 9.day,
       },
       {
         input:  "~10",
-        expect: -10.day,
+        expect: -9.day,
       },
     ].each do |spec_case|
       describe "returns #{spec_case[:expect]}, " do
@@ -213,27 +213,27 @@ describe Dast::TimeFactory do
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
         diff:   "3",
-        expect: Time.parse("2018-03-23 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        expect: Time.parse("2018-03-22 00:00:00", "%Y-%m-%d %H:%M:%S"),
       },
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
         diff:   "+3",
-        expect: Time.parse("2018-03-23 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        expect: Time.parse("2018-03-22 00:00:00", "%Y-%m-%d %H:%M:%S"),
       },
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
         diff:   "+3y",
-        expect: Time.parse("2021-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        expect: Time.parse("2020-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
       },
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
         diff:   "~3m",
-        expect: Time.parse("2018-03-19 23:57:00", "%Y-%m-%d %H:%M:%S"),
+        expect: Time.parse("2018-03-19 23:58:00", "%Y-%m-%d %H:%M:%S"),
       },
       {
         time:   Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
         diff:   "~3h",
-        expect: Time.parse("2018-03-19 21:00:00", "%Y-%m-%d %H:%M:%S"),
+        expect: Time.parse("2018-03-19 22:00:00", "%Y-%m-%d %H:%M:%S"),
       },
     ].each do |spec_case|
       describe "returns #{spec_case[:expect]}, " do

@@ -126,7 +126,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2018-03-20", "2"],
+        arguments: ["2018-03-20", "3"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -135,7 +135,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2", "2018-03-20"],
+        arguments: ["3", "2018-03-20"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -144,7 +144,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2018-03-20", "+2"],
+        arguments: ["2018-03-20", "+3"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -153,7 +153,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2018-03-20", "+2d"],
+        arguments: ["2018-03-20", "+3d"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -162,7 +162,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2018-03-20", "+2day"],
+        arguments: ["2018-03-20", "+3day"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -171,7 +171,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2018-03-20", "~2"],
+        arguments: ["2018-03-20", "~3"],
         expect:    "'2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
@@ -180,7 +180,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2018-03-20 00:00:00", "~2m"],
+        arguments: ["2018-03-20 00:00:00", "~3m"],
         expect:    "'2018-03-19 23:58:00','2018-03-19 23:59:00','2018-03-20 00:00:00'",
       },
       {
@@ -190,7 +190,7 @@ describe Dast::DateList do
         delimiter: ",",
         quote:     "'",
         arguments: ["2018-03-20 00:00:00", "~2mon"],
-        expect:    "'2018-01-20 00:00:00','2018-01-28 00:00:00','2018-02-05 00:00:00','2018-02-13 00:00:00','2018-02-21 00:00:00','2018-03-01 00:00:00','2018-03-09 00:00:00','2018-03-17 00:00:00'",
+        expect:    "'2018-02-20 00:00:00','2018-02-28 00:00:00','2018-03-08 00:00:00','2018-03-16 00:00:00'",
       },
       {
         now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
@@ -216,7 +216,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2"],
+        arguments: ["3"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -225,7 +225,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["~2"],
+        arguments: ["~3"],
         expect:    "'2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
@@ -234,7 +234,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2d"],
+        arguments: ["3d"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -243,7 +243,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["~2d"],
+        arguments: ["~3d"],
         expect:    "'2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
@@ -252,7 +252,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2y"],
+        arguments: ["3y"],
         expect:    "'2018-03-20 00:00:00','2019-03-20 00:00:00','2020-03-20 00:00:00'",
       },
       {
@@ -261,7 +261,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["~2y"],
+        arguments: ["~3y"],
         expect:    "'2016-03-20 00:00:00','2017-03-20 00:00:00','2018-03-20 00:00:00'",
       },
       {
@@ -270,7 +270,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2mon"],
+        arguments: ["3mon"],
         expect:    "'2018-03-20 00:00:00','2018-04-20 00:00:00','2018-05-20 00:00:00'",
       },
       {
@@ -279,7 +279,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2d"],
+        arguments: ["3d"],
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
@@ -288,7 +288,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2h"],
+        arguments: ["3h"],
         expect:    "'2018-03-20 00:00:00','2018-03-20 01:00:00','2018-03-20 02:00:00'",
       },
       {
@@ -297,7 +297,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2m"],
+        arguments: ["3m"],
         expect:    "'2018-03-20 00:00:00','2018-03-20 00:01:00','2018-03-20 00:02:00'",
       },
       {
@@ -306,7 +306,7 @@ describe Dast::DateList do
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
         quote:     "'",
-        arguments: ["2s"],
+        arguments: ["3s"],
         expect:    "'2018-03-20 00:00:00','2018-03-20 00:00:01','2018-03-20 00:00:02'",
       },
       {

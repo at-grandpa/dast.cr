@@ -82,9 +82,9 @@ module Dast
       invalid_diff_format! if unit.nil?
       case plus_minus
       when "+", ""
-        diff = convert_time_span(value.to_i32, unit)
+        diff = convert_time_span(value.to_i32 - 1 , unit)
       else
-        diff = convert_time_span(value.to_i32 * -1, unit)
+        diff = convert_time_span((value.to_i32 - 1) * -1, unit)
       end
       diff
     end
