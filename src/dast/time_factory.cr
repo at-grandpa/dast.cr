@@ -35,10 +35,11 @@ module Dast
       time_str1, time_str2 = arguments
       diff1 = Dast::Span::Diff.new(time_str1)
       diff2 = Dast::Span::Diff.new(time_str2)
-      if diff1.diff?
+      case
+      when diff1.diff?
         time2 = Time.parse(format_for_time(time_str2), "%Y-%m-%d %H:%M:%S")
         time1 = diff1.add(time2)
-      elsif diff2.diff?
+      when diff2.diff?
         time1 = Time.parse(format_for_time(time_str1), "%Y-%m-%d %H:%M:%S")
         time2 = diff2.add(time1)
       else
@@ -48,23 +49,21 @@ module Dast
       return time1, time2
     end
 
+    def self.pattern
+      /\A(?<ymd>\d{4}[\/-]\d{2}[\/-]\d{2}) ?(?<hms>|\d{2}:\d{2}:\d{2})\z/
+    end
+
     def self.format_for_time(input)
       invalid_time_format! if input.nil?
-      splitted = input.split(" ")
-      if splitted.size == 1
-        ymd = splitted.first?
-        hms = "00:00:00"
-      elsif splitted.size == 2
-        ymd, hms = splitted
-      else
-        invalid_time_format!
-      end
+      match = input.match(pattern)
+      invalid_time_format! if match.nil?
+      ymd = match.to_h["ymd"]?
+      hms = match.to_h["hms"]?
       invalid_time_format! if ymd.nil?
       invalid_time_format! if hms.nil?
+      hms = hms.empty? ? "00:00:00" : hms
       converted_ymd = ymd.gsub(/\//, "-")
       converted_hms = hms.gsub(/::/, ":")
-      invalid_time_format! unless !!converted_ymd.match(/\d{4}-\d{2}-\d{2}/)
-      invalid_time_format! unless !!converted_hms.match(/\d{2}:\d{2}:\d{2}/)
       converted_ymd + " " + converted_hms
     end
 
