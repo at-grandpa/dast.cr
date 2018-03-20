@@ -2,7 +2,7 @@ require "./span/*"
 
 module Dast
   abstract class Span
-    def initialize(@input : String)
+    def initialize(@input : String | Nil)
     end
 
     abstract def pattern

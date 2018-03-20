@@ -8,7 +8,6 @@ module Dast
         time2 = (now - 6.day) # 1 week ago.
       when 1
         arg = arguments.first?
-        invalid_diff_format! if arg.nil?
         d = Dast::Span::Diff.new(arg)
         if d.diff?
           time1 = now
@@ -66,12 +65,6 @@ module Dast
 
     def self.invalid_time_format!
       raise Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
-    end
-
-    DIFF_PATTERN = /\A(?<plus_minus>|\+|\~)(?<value>\d+)(?<unit>|[a-z]+?)\z/
-
-    def self.invalid_diff_format!
-      raise Exception.new("Invalid diff format. Please /[+-]\d(year|month|day|hour|minute|second)?/")
     end
   end
 end

@@ -6,7 +6,9 @@ module Dast
       end
 
       def to_time_span : Time::MonthSpan | Time::Span
-        match = @input.match(pattern)
+        input = @input
+        invalid_format! if input.nil?
+        match = input.match(pattern)
         invalid_format! if match.nil?
         value = match.to_h["value"]?
         unit = match.to_h["unit"]?
