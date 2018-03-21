@@ -45,7 +45,7 @@ If one diff format, display from applied diff date to now.
 
 ```console
 $ dast ~3day
-'2018-03-19','2018-03-20','2018-03-21' (today)
+'2018-03-18','2018-03-19','2018-03-20','2018-03-21' (today)
 ```
 
 * The minus sign is specified with `~`.
@@ -62,13 +62,13 @@ If date and diff format, display from applied diff date to date.
 
 ```console
 $ dast 2018-03-27 ~3day
-'2018-03-25','2018-03-26','2018-03-27'
+'2018-03-24','2018-03-25','2018-03-26','2018-03-27'
 ```
 
 Interval, Format, Delimiter, Quote.
 
 ```console
-$ dast '2018-03-21 12:00:00' 2h --interval=20min --format='%Y-%m-%d %H:%M:%S' --delimiter=' | ' --quote='"'
+$ dast '2018-03-21 12:00:00' 1h --interval=20min --format='%Y-%m-%d %H:%M:%S' --delimiter=' | ' --quote='"'
 "2018-03-21 12:00:00" | "2018-03-21 12:20:00" | "2018-03-21 12:40:00" | "2018-03-21 13:00:00"
 ```
 
