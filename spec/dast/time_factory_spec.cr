@@ -44,7 +44,7 @@ describe Dast::TimeFactory do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
+          expect_raises(Dast::DastException, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
             Dast::TimeFactory.create_times(spec_case[:now], spec_case[:arguments])
           end
         end
@@ -92,7 +92,7 @@ describe Dast::TimeFactory do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]") do
+          expect_raises(Dast::DastException, "Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]") do
             Dast::TimeFactory.normalize_date_time(spec_case[:input])
           end
         end
@@ -201,7 +201,7 @@ describe Dast::TimeFactory do
   #  ].each do |spec_case|
   #    describe "raises an Exception, " do
   #      it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-  #        expect_raises(Exception, "Invalid diff format. Please /[+\-]\d(year|month|day|hour|minute|second)?/") do
+  #        expect_raises(Dast::DastException, "Invalid diff format. Please /[+\-]\d(year|month|day|hour|minute|second)?/") do
   #          Dast::TimeFactory.split_diff(spec_case[:input])
   #        end
   #      end

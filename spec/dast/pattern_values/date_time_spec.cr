@@ -56,7 +56,7 @@ describe Dast::PatternValues::DateTime do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]") do
+          expect_raises(Dast::DastException, "Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]") do
             Dast::PatternValues::DateTime.new(input: spec_case[:input]).normalize
           end
         end

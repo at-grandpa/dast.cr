@@ -112,7 +112,7 @@ describe Dast::PatternValues::Span::Interval do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].") do
+          expect_raises(Dast::DastException, "Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].") do
             Dast::PatternValues::Span::Interval.new(input: spec_case[:input]).to_time_span
           end
         end

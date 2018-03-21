@@ -344,7 +344,7 @@ describe Dast::DateList do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
+          expect_raises(Dast::DastException, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
             Dast::DateList.new(
               now: spec_case[:now],
               interval: spec_case[:interval],

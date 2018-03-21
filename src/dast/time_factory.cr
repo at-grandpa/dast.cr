@@ -5,7 +5,7 @@ module Dast
                      when 0 then arguments_size_zero(now)
                      when 1 then arguments_size_one(now, arguments)
                      when 2 then arguments_size_two(now, arguments)
-                     else        raise Exception.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)")
+                     else        raise DastException.new("Wrong number of arguments. (given #{arguments.size}, expected 0 or 1 or 2)")
                      end
 
       time1 < time2 ? [time1, time2] : [time2, time1]

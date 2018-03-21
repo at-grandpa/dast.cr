@@ -230,7 +230,7 @@ describe Dast::PatternValues::Span::Diff do
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Exception, "Invalid diff format. Please /[+~]\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/") do
+          expect_raises(Dast::DastException, "Invalid diff format. Please /[+~]\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/") do
             Dast::PatternValues::Span::Diff.new(input: spec_case[:input]).to_time_span
           end
         end

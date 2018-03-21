@@ -16,7 +16,7 @@ module Dast
         end
 
         def invalid_format_exception
-          Exception.new("Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].")
+          DastException.new("Invalid interval format. The format of the '--interval' is {Int}[year|y|month|mon|day|d|hour|h|minute|min|m|second|sec|s].")
         end
       end
     end

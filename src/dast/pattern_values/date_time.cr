@@ -10,7 +10,7 @@ module Dast
       end
 
       def invalid_format_exception
-        Exception.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
+        DastException.new("Invalid time format. Please [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]")
       end
 
       def normalize
