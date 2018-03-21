@@ -9,8 +9,8 @@ CLI tool to display the **da**te li**st**.
 ### homebrew
 
 ```console
-$ brew tap at-grandpa/homebrew-dast
-$ brew install dast
+$ brew tap at-grandpa/homebrew-dast.cr
+$ brew install dast.cr
 ```
 
 ### git clone
@@ -18,8 +18,8 @@ $ brew install dast
 ```console
 $ brew update
 $ brew install crystal-lang
-$ git clone https://github.com/at-grandpa/dast.git
-$ cd dast
+$ git clone https://github.com/at-grandpa/dast.cr.git
+$ cd dast.cr
 $ make install
 ```
 
