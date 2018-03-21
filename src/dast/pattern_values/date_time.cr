@@ -5,10 +5,6 @@ module Dast
         /\A(?<ymd>\d{4}[\/-]\d{2}[\/-]\d{2}) ?(?<hms>|\d{2}:\d{2}:\d{2})\z/
       end
 
-      def pattern_keys
-        ["ymd", "hms"]
-      end
-
       def invalid_format_exception
         DastException.new("Invalid date format or diff format. See '--help'.")
       end
