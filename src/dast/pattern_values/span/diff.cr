@@ -13,8 +13,8 @@ module Dast
         def to_time_span : Time::MonthSpan | Time::Span
           plus_minus, value, unit = match_values
           span_value = case plus_minus
-                       when "+", "" then (value.to_i32 - 1)
-                       else              (value.to_i32 - 1) * -1
+                       when "+", "" then value.to_i32
+                       else              value.to_i32 * -1
                        end
           convert_time_span(span_value, unit, {patterns: [""], default_time_span: span_value.day})
         end
