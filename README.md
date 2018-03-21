@@ -58,7 +58,7 @@ $ dast 2018-03-25 2018-03-27
 '2018-03-25','2018-03-26','2018-03-27'
 ```
 
-If date and diff format, display from applied diff date to date.
+If date and diff format, display from applied diff date to the date.
 
 ```console
 $ dast 2018-03-27 ~3day
