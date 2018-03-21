@@ -6,8 +6,8 @@ module Dast
           /\A(?<plus_minus>|\+|\~)(?<value>\d+)(?<unit>|[a-z]+?)\z/
         end
 
-        def pattern_keys
-          ["plus_minus", "value", "unit"]
+        def invalid_format_exception
+          DastException.new("Invalid diff format. Please /(|+|~)\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/")
         end
 
         def to_time_span : Time::MonthSpan | Time::Span
@@ -17,10 +17,6 @@ module Dast
                        else              value.to_i32 * -1
                        end
           convert_time_span(span_value, unit, {patterns: [""], default_time_span: span_value.day})
-        end
-
-        def invalid_format_exception
-          DastException.new("Invalid diff format. Please /(|+|~)\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/")
         end
 
         def add(time : Time)
