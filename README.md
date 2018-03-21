@@ -9,8 +9,8 @@ CLI tool to display the **da**te li**st**.
 ### homebrew
 
 ```console
-$ brew tap at-grandpa/homebrew-des
-$ brew install des
+$ brew tap at-grandpa/homebrew-dast
+$ brew install dast
 ```
 
 #### git clone
