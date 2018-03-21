@@ -18,15 +18,15 @@ module Dast
           $ dast 2018-03-10
           '2018-03-10','2018-03-11', ... '2018-03-21' (today)
 
-          * date format: [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]
+            -- date format: [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]
 
         ex3) If one diff format, display from applied diff date to now.
 
           $ dast ~3day
           '2018-03-19','2018-03-20','2018-03-21' (today)
 
-          * The minus sign is specified with "~".
-          * diff format: /(|+|~)\\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/
+            -- The minus sign is specified with "~".
+            -- diff format: /(|+|~)\\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/
 
         ex4) If two date, display from date1 to date2.
 
@@ -41,8 +41,7 @@ module Dast
         ex6) Interval, Format, Delimiter, Quote.
 
           $ dast '2018-03-21 12:00:00' 2h --interval=20min --format='%Y-%m-%d %H:%M:%S' --delimiter=' | ' --quote='"'
-
-
+          "2018-03-21 12:00:00" | "2018-03-21 12:20:00" | "2018-03-21 12:40:00" | "2018-03-21 13:00:00"
 
     USAGE_MESSAGE
 
