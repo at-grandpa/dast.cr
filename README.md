@@ -80,7 +80,7 @@ crystal spec
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/dast/fork )
+1. Fork it ( https://github.com/at-grandpa/dast/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -88,4 +88,4 @@ crystal spec
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) at-grandpa - creator, maintainer
+- [at-grandpa](https://github.com/at-grandpa) at-grandpa - creator, maintainer
