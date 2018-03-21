@@ -341,10 +341,20 @@ describe Dast::DateList do
           delimiter: ",",
           quote:     "'",
           arguments: ["2018-03-21", "2018-03-22", "2018-03-23"],
+          exception_message: "Wrong number of arguments. (given 3, expected 0 or 1 or 2)",
+        },
+        {
+          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          interval:  "1d",
+          format:    "%Y-%m-%d %H:%M:%S",
+          delimiter: ",",
+          quote:     "'",
+          arguments: ["2018-03-21", "2018-03-22", "2018-03-23", "2018-03-24"],
+          exception_message: "Wrong number of arguments. (given 4, expected 0 or 1 or 2)",
         },
       ].each do |spec_case|
         it "when #{spec_case.to_h.reject { |k, _| k.to_s == "expect" }}" do
-          expect_raises(Dast::DastException, "Wrong number of arguments. (given #{spec_case[:arguments].size}, expected 0 or 1 or 2)") do
+          expect_raises(Dast::DastException, spec_case[:exception_message]) do
             Dast::DateList.new(
               now: spec_case[:now],
               interval: spec_case[:interval],
