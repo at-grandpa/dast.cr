@@ -20,7 +20,7 @@ module Dast
         end
 
         def invalid_format_exception
-          DastException.new("Invalid diff format. Please /[+~]\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/")
+          DastException.new("Invalid diff format. Please /(|+|~)\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/")
         end
 
         def add(time : Time)
