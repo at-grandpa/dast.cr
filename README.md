@@ -13,7 +13,7 @@ $ brew tap at-grandpa/homebrew-dast
 $ brew install dast
 ```
 
-#### git clone
+### git clone
 
 ```console
 $ brew update
@@ -39,7 +39,7 @@ $ dast 2018-03-10
 '2018-03-10','2018-03-11', ... '2018-03-21' (today)
 ```
 
-* date format: [%Y-%m-%d] or [%Y/%m/%d] or [%Y-%m-%d %H:%M:%S]
+* date format: `%Y-%m-%d` or `%Y/%m/%d` or `%Y-%m-%d %H:%M:%S`
 
 If one diff format, display from applied diff date to now.
 
