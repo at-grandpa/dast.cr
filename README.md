@@ -49,7 +49,7 @@ $ dast ~3day
 ```
 
 * The minus sign is specified with `~`.
-* diff format: `/(|+|~)\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/`
+* diff format: `/(|+|~)\d+(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/`
 
 If two date, display from date1 to date2.
 
