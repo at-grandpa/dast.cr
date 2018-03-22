@@ -26,7 +26,7 @@ module Dast
           '2018-03-18','2018-03-19','2018-03-20','2018-03-21' (today)
 
             -- The minus sign is specified with "~".
-            -- diff format: /(|+|~)\\d(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/
+            -- diff format: /(|+|~)\\d+(year|y|month|mon|day|d||hour|h|minute|min|m|second|sec|s)?/
 
         ex4) If two date, display from date1 to date2.
 
