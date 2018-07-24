@@ -3,7 +3,7 @@ DAST_BIN ?= $(shell which dast)
 PREFIX ?= /usr/local
 OUTPUT_BIN ?= bin/dast
 TAR_DIR ?= bin/dast
-VERSION ?= 0.1.0
+VERSION ?= 0.2.0
 TAR_GZ_FILE_NAME ?= dast-$(VERSION)-darwin-x86_64.tar.gz
 
 build:
