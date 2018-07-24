@@ -5,27 +5,27 @@ describe Dast::TimeFactory do
     describe "returns Time object 'from' and 'to', " do
       [
         {
-          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           arguments: ["2018-03-18", "2018-03-19"],
           expect:    {
-            from: Time.parse("2018-03-18", "%F"),
-            to:   Time.parse("2018-03-19", "%F"),
+            from: Time.parse("2018-03-18", "%F", Time::Location.local),
+            to:   Time.parse("2018-03-19", "%F", Time::Location.local),
           },
         },
         {
-          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           arguments: ["2018-03-19", "2018-03-18"],
           expect:    {
-            from: Time.parse("2018-03-18", "%F"),
-            to:   Time.parse("2018-03-19", "%F"),
+            from: Time.parse("2018-03-18", "%F", Time::Location.local),
+            to:   Time.parse("2018-03-19", "%F", Time::Location.local),
           },
         },
         {
-          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           arguments: ["2018-03-19 00:00:00", "2018-03-18 12:00:00"],
           expect:    {
-            from: Time.parse("2018-03-18 12:00:00", "%Y-%m-%d %H:%M:%S"),
-            to:   Time.parse("2018-03-19 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            from: Time.parse("2018-03-18 12:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
+            to:   Time.parse("2018-03-19 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           },
         },
       ].each do |spec_case|
@@ -39,7 +39,7 @@ describe Dast::TimeFactory do
     describe "raises an Exception, " do
       [
         {
-          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           arguments: ["2018-03-18", "2018-03-19", "2018-03-20"],
         },
       ].each do |spec_case|

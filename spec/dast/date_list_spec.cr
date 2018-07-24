@@ -4,7 +4,7 @@ describe Dast::DateList do
   describe "#to_s" do
     [
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -13,7 +13,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "2d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -22,7 +22,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-22 00:00:00','2018-03-24 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "2d",
         format:    "%F",
         delimiter: ",",
@@ -31,7 +31,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20','2018-03-22','2018-03-24'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "2d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: " | ",
@@ -40,7 +40,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00' | '2018-03-22 00:00:00' | '2018-03-24 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "2d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -49,7 +49,7 @@ describe Dast::DateList do
         expect:    "\"2018-03-20 00:00:00\",\"2018-03-22 00:00:00\",\"2018-03-24 00:00:00\"",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "2d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -58,7 +58,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-22 00:00:00','2018-03-24 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "2d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -67,7 +67,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-22 00:00:00','2018-03-24 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1y",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -76,7 +76,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2019-03-20 00:00:00','2020-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1mon",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -85,7 +85,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-04-20 00:00:00','2018-05-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -94,7 +94,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1h",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -103,7 +103,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-20 01:00:00','2018-03-20 02:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1m",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -112,7 +112,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-20 00:01:00','2018-03-20 00:02:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1s",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -121,7 +121,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-20 00:00:01','2018-03-20 00:00:02'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -130,7 +130,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -139,7 +139,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -148,7 +148,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -157,7 +157,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -166,7 +166,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -175,7 +175,7 @@ describe Dast::DateList do
         expect:    "'2018-03-17 00:00:00','2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1m",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -184,7 +184,7 @@ describe Dast::DateList do
         expect:    "'2018-03-19 23:57:00','2018-03-19 23:58:00','2018-03-19 23:59:00','2018-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "8d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -193,7 +193,7 @@ describe Dast::DateList do
         expect:    "'2018-01-20 00:00:00','2018-01-28 00:00:00','2018-02-05 00:00:00','2018-02-13 00:00:00','2018-02-21 00:00:00','2018-03-01 00:00:00','2018-03-09 00:00:00','2018-03-17 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -202,7 +202,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -211,7 +211,7 @@ describe Dast::DateList do
         expect:    "'2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -220,7 +220,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -229,7 +229,7 @@ describe Dast::DateList do
         expect:    "'2018-03-17 00:00:00','2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -238,7 +238,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -247,7 +247,7 @@ describe Dast::DateList do
         expect:    "'2018-03-17 00:00:00','2018-03-18 00:00:00','2018-03-19 00:00:00','2018-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1y",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -256,7 +256,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2019-03-20 00:00:00','2020-03-20 00:00:00','2021-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1y",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -265,7 +265,7 @@ describe Dast::DateList do
         expect:    "'2015-03-20 00:00:00','2016-03-20 00:00:00','2017-03-20 00:00:00','2018-03-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1mon",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -274,7 +274,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-04-20 00:00:00','2018-05-20 00:00:00','2018-06-20 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -283,7 +283,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-21 00:00:00','2018-03-22 00:00:00','2018-03-23 00:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1h",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -292,7 +292,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-20 01:00:00','2018-03-20 02:00:00','2018-03-20 03:00:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1m",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -301,7 +301,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-20 00:01:00','2018-03-20 00:02:00','2018-03-20 00:03:00'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1s",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -310,7 +310,7 @@ describe Dast::DateList do
         expect:    "'2018-03-20 00:00:00','2018-03-20 00:00:01','2018-03-20 00:00:02','2018-03-20 00:00:03'",
       },
       {
-        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+        now:       Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
         interval:  "1d",
         format:    "%Y-%m-%d %H:%M:%S",
         delimiter: ",",
@@ -335,7 +335,7 @@ describe Dast::DateList do
     describe "raises an Exception, " do
       [
         {
-          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           interval:          "1d",
           format:            "%Y-%m-%d %H:%M:%S",
           delimiter:         ",",
@@ -344,7 +344,7 @@ describe Dast::DateList do
           exception_message: "Wrong number of arguments. (given 3, expected 0 or 1 or 2)",
         },
         {
-          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           interval:          "1d",
           format:            "%Y-%m-%d %H:%M:%S",
           delimiter:         ",",
@@ -353,7 +353,7 @@ describe Dast::DateList do
           exception_message: "Wrong number of arguments. (given 4, expected 0 or 1 or 2)",
         },
         {
-          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           interval:          "1d",
           format:            "%Y-%m-%d %H:%M:%S",
           delimiter:         ",",
@@ -362,7 +362,7 @@ describe Dast::DateList do
           exception_message: "Invalid date format or diff format. See '--help'.",
         },
         {
-          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           interval:          "1d",
           format:            "%Y-%m-%d %H:%M:%S",
           delimiter:         ",",
@@ -371,7 +371,7 @@ describe Dast::DateList do
           exception_message: "Invalid date format or diff format. See '--help'.",
         },
         {
-          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S"),
+          now:               Time.parse("2018-03-20 00:00:00", "%Y-%m-%d %H:%M:%S", Time::Location.local),
           interval:          "1d",
           format:            "%Y-%m-%d %H:%M:%S",
           delimiter:         ",",

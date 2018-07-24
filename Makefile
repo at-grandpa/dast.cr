@@ -8,7 +8,7 @@ TAR_GZ_FILE_NAME ?= dast-$(VERSION)-darwin-x86_64.tar.gz
 
 build:
 	rm -rf ./bin/*
-	$(CRYSTAL_BIN) dep update
+	shards update
 	$(CRYSTAL_BIN) build --release -o $(OUTPUT_BIN) src/cli.cr $(CRFLAGS)
 
 clean:

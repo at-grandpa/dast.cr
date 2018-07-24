@@ -18,7 +18,7 @@ module Dast
     def self.arguments_size_one(now : Time, arguments : Array(String)) : Tuple(Time, Time)
       arg = arguments.first?
       d = Dast::PatternValues::Span::Diff.new(arg)
-      another = d.diff? ? d.add(now) : Time.parse(normalize_date_time(arg), "%Y-%m-%d %H:%M:%S")
+      another = d.diff? ? d.add(now) : Time.parse(normalize_date_time(arg), "%Y-%m-%d %H:%M:%S", Time::Location.local)
       return now, another
     end
 
@@ -28,14 +28,14 @@ module Dast
       diff2 = Dast::PatternValues::Span::Diff.new(arg2)
       case
       when diff1.diff?
-        time2 = Time.parse(normalize_date_time(arg2), "%Y-%m-%d %H:%M:%S")
+        time2 = Time.parse(normalize_date_time(arg2), "%Y-%m-%d %H:%M:%S", Time::Location.local)
         time1 = diff1.add(time2)
       when diff2.diff?
-        time1 = Time.parse(normalize_date_time(arg1), "%Y-%m-%d %H:%M:%S")
+        time1 = Time.parse(normalize_date_time(arg1), "%Y-%m-%d %H:%M:%S", Time::Location.local)
         time2 = diff2.add(time1)
       else
-        time1 = Time.parse(normalize_date_time(arg1), "%Y-%m-%d %H:%M:%S")
-        time2 = Time.parse(normalize_date_time(arg2), "%Y-%m-%d %H:%M:%S")
+        time1 = Time.parse(normalize_date_time(arg1), "%Y-%m-%d %H:%M:%S", Time::Location.local)
+        time2 = Time.parse(normalize_date_time(arg2), "%Y-%m-%d %H:%M:%S", Time::Location.local)
       end
       return time1, time2
     end
